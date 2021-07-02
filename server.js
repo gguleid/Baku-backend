@@ -21,6 +21,17 @@ mongoose.connection
 .on("error", (error) => console.log(error));
 
 ///////////////////////////////
+// MODELS
+///////////////////////////////
+const RecipeSchema = new mongoose.Schema({
+    drinkName: String,
+    image: String,
+    name: String,
+    ingredenits: String,
+    directions: String
+});
+
+///////////////////////////////
 // ROUTES
 ///////////////////////////////
 app.get('/', (req, res) => {
