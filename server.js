@@ -61,6 +61,10 @@ app.post('/recipes', async (req, res) => {
     }
 })
 
+
+app.use('/users', usersRouter);
+app.use('/recipes', recipesRouter);
+
 ///////////////////////////////
 // LISTENER
 ///////////////////////////////
