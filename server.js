@@ -61,8 +61,10 @@ app.post('/recipes', async (req, res) => {
     }
 })
 
+const customersRouter = require('./routes/customers');
+const recipesRouter= require('./routes/recipes');
 
-app.use('/users', usersRouter);
+app.use('/customers', customersRouter);
 app.use('/recipes', recipesRouter);
 
 ///////////////////////////////
