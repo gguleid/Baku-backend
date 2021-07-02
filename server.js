@@ -5,8 +5,6 @@ const { PORT = 5000, MONGODB_URL } = process.env;
 const mongoose = require("mongoose");
 const app = express();
 
-
-const Router = require('express').Router;
 ///////////////////////////////
 // DATABASE CONNECTION
 ///////////////////////////////
@@ -42,23 +40,23 @@ app.get('/', (req, res) => {
     res.send('Baku cold brew');
 })
 
-// Recipes Index
-app.get('/recipes', async (req, res) => {
-    try {
-        res.json(await Recipe.find({}));
-    } catch (error) {
-        res.status(400).json(error);
-    }
-});
+// // Recipes Index
+// app.get('/recipes', async (req, res) => {
+//     try {
+//         res.json(await Recipe.find({}));
+//     } catch (error) {
+//         res.status(400).json(error);
+//     }
+// });
 
-// Recipe create route
-app.post('/recipes', async (req, res) => {
-    try {
-        res.json(await Recipe.create(req.body));
-    } catch (error) {
-        res.status(400).json(error);
-    }
-})
+// // Recipe create route
+// app.post('/recipes', async (req, res) => {
+//     try {
+//         res.json(await Recipe.create(req.body));
+//     } catch (error) {
+//         res.status(400).json(error);
+//     }
+// })
 
 
 
