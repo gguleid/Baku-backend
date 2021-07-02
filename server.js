@@ -58,7 +58,13 @@ app.get('/recipes', async (req, res) => {
 });
 
 // Recipe create route
-
+app.post('/recipes', async (req, res) => {
+    try {
+        res.json(await Recipe.create(req.body));
+    } catch (error) {
+        res.status(400).json(error);
+    }
+})
 
 ///////////////////////////////
 // LISTENER
