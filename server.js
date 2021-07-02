@@ -6,6 +6,7 @@ const { PORT = 5000, MONGODB_URL } = process.env;
 
 const mongoose = require("mongoose");
 const express = require('express');
+const morgan = require('morgan');
 const app = express();
 ///////////////////////////////
 // DATABASE CONNECTION
@@ -32,6 +33,13 @@ const RecipeSchema = new mongoose.Schema({
 });
 
 const Recipe = mongoose.model('Recipe', RecipeSchema);
+
+///////////////////////////////
+// MIDDLEWARE
+///////////////////////////////
+app.use(cors());
+app.use(morgan('dev'));
+app.use(express.json());
 
 ///////////////////////////////
 // ROUTES
