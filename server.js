@@ -7,6 +7,7 @@ const { PORT = 5000, MONGODB_URL } = process.env;
 const mongoose = require("mongoose");
 const express = require('express');
 const morgan = require('morgan');
+const cors = require('cors');
 const app = express();
 ///////////////////////////////
 // DATABASE CONNECTION
@@ -24,15 +25,9 @@ mongoose.connection
 ///////////////////////////////
 // MODELS
 ///////////////////////////////
-const RecipeSchema = new mongoose.Schema({
-    drinkName: String,
-    image: String,
-    name: String,
-    ingredenits: String,
-    directions: String
-});
 
-const Recipe = mongoose.model('Recipe', RecipeSchema);
+
+
 
 ///////////////////////////////
 // MIDDLEWARE
