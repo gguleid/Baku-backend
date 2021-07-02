@@ -31,12 +31,26 @@ const RecipeSchema = new mongoose.Schema({
     directions: String
 });
 
+const Recipe = mongoose.model('Recipe', RecipeSchema);
+
 ///////////////////////////////
 // ROUTES
 ///////////////////////////////
 app.get('/', (req, res) => {
     res.send('Baku is here');
 })
+
+// Recipes Index
+app.get('/recipes', async (req, res) => {
+    try {
+        res.json(await Recipe.find({}));
+    } catch (error) {
+        res.status(400).json(error);
+    }
+});
+
+// Recipe create route
+
 
 ///////////////////////////////
 // LISTENER
