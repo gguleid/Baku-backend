@@ -1,14 +1,12 @@
-///////////////////////////////
-// DEPENDENCIES
-///////////////////////////////
 require('dotenv').config();
-const { PORT = 5000, MONGODB_URL } = process.env;
-
-const mongoose = require("mongoose");
 const express = require('express');
-const morgan = require('morgan');
 const cors = require('cors');
+const { PORT = 5000, MONGODB_URL } = process.env;
+const mongoose = require("mongoose");
 const app = express();
+
+
+const Router = require('express').Router;
 ///////////////////////////////
 // DATABASE CONNECTION
 ///////////////////////////////
@@ -22,25 +20,26 @@ mongoose.connection
 .on("closed", () => console.log("You're disconnected to mongoose"))
 .on("error", (error) => console.log(error));
 
-///////////////////////////////
-// MODELS
-///////////////////////////////
-
-
-
 
 ///////////////////////////////
 // MIDDLEWARE
 ///////////////////////////////
 app.use(cors());
-app.use(morgan('dev'));
 app.use(express.json());
 
 ///////////////////////////////
 // ROUTES
 ///////////////////////////////
+const customersRouter = require('./controllers/customer');
+app.use('/customers', customersRouter);
+
+const recipesRouter= require('./routes/recipes');
+app.use('/recipes', recipesRouter);
+
+
+
 app.get('/', (req, res) => {
-    res.send('Baku is here');
+    res.send('Baku cold brew');
 })
 
 // Recipes Index
@@ -61,11 +60,7 @@ app.post('/recipes', async (req, res) => {
     }
 })
 
-const customersRouter = require('./routes/customers');
-const recipesRouter= require('./routes/recipes');
 
-app.use('/customers', customersRouter);
-app.use('/recipes', recipesRouter);
 
 ///////////////////////////////
 // LISTENER
