@@ -31,8 +31,8 @@ app.use(express.json());
 const customersRouter = require('./controllers/customer');
 app.use('/customers', customersRouter);
 
-// const recipesRouter= require('./controllers/recipes');
-// app.use('/recipes', recipesRouter);
+const productsRouter= require('./controllers/products');
+app.use('/products', productsRouter);
 
 
 
@@ -40,14 +40,6 @@ app.get('/', (req, res) => {
     res.send('Baku cold brew');
 })
 
-// // Recipes Index
-// app.get('/recipes', async (req, res) => {
-//     try {
-//         res.json(await Recipe.find({}));
-//     } catch (error) {
-//         res.status(400).json(error);
-//     }
-// });
 
 // // Recipe create route
 // app.post('/recipes', async (req, res) => {
