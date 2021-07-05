@@ -31,8 +31,8 @@ app.use(express.json());
 const customersRouter = require('./controllers/customer');
 app.use('/customers', customersRouter);
 
-const recipesRouter= require('./routes/recipes');
-app.use('/recipes', recipesRouter);
+// const recipesRouter= require('./controllers/recipes');
+// app.use('/recipes', recipesRouter);
 
 
 
