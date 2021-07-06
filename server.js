@@ -3,6 +3,8 @@ const express = require('express');
 const cors = require('cors');
 const { PORT = 5000, MONGODB_URL } = process.env;
 const mongoose = require("mongoose");
+const fileUpload = require('express-fileupload');
+const cookieParaser = require('cookie-parser');
 const app = express();
 
 ///////////////////////////////
@@ -24,6 +26,10 @@ mongoose.connection
 ///////////////////////////////
 app.use(cors());
 app.use(express.json());
+app.use(cookieParaser());
+app.use(fileUpload({
+    useTempFiles: true
+}));
 
 ///////////////////////////////
 // ROUTES
