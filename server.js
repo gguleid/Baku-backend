@@ -34,8 +34,8 @@ app.use(fileUpload({
 ///////////////////////////////
 // ROUTES
 ///////////////////////////////
-const userCtrlRouter = require('./controllers/userCtrl');
-app.use('/user', customersRouter);
+const userRouter = require('./routes/userRouter');
+app.use('/user', userRouter);
 
 const productsRouter= require('./controllers/products');
 app.use('/products', productsRouter);

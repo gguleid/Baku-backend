@@ -11,7 +11,7 @@ const userSchema = new mongoose.Schema({
     email: {
         type: String,
         requried: true,
-        trim: true,
+        unqiue: true,
     },
     password: {
         type: String,
@@ -32,6 +32,6 @@ const userSchema = new mongoose.Schema({
 }
     );
 
-const Customer = mongoose.model('Users', userSchema);
+const Users = mongoose.model('Users', userSchema);
 
-module.exports = User;
+module.exports = Users;
