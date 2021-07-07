@@ -46,6 +46,21 @@ const userCtrl = {
             return res.status(500).json({msg: err.message})
         }
     },
+
+    // login: async (req, res) => {
+    //     try {
+    //         const { email, password } = req.body;
+
+    //         const user = await Users.findOne({ email }) 
+    //         if(!user) return res.status(400).json({ msg: "User does not exist."})
+
+    //         const isMatch = await
+
+    //     } catch (error) {
+    //         return res.status(500).json({ msg: err.message })
+    //     }
+    // },
+
     refreshToken: (req, res) =>{
         try {
             const rf_token = req.cookies.refreshtoken;

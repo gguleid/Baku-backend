@@ -1,10 +1,8 @@
 require('dotenv').config();
-const express = require('express');
-const cors = require('cors');
 const { PORT = 5000, MONGODB_URL } = process.env;
 const mongoose = require("mongoose");
-const fileUpload = require('express-fileupload');
-const cookieParaser = require('cookie-parser');
+const cors = require('cors');
+const express = require('express');
 const app = express();
 
 ///////////////////////////////
@@ -20,32 +18,62 @@ mongoose.connection
 .on("closed", () => console.log("You're disconnected to mongoose"))
 .on("error", (error) => console.log(error));
 
+///////////////////////////////
+// MODEL
+///////////////////////////////
+const ProductsSchema = new mongoose.Schema({
+    name: {
+        type: String,
+        requried: true,
+    },
+    image: String,
+    price: Number,
+    description: String
 
+ },
+{
+    timestamps: true,
+}
+    );
+
+const Products = mongoose.model('Products', ProductsSchema);
 ///////////////////////////////
 // MIDDLEWARE
 ///////////////////////////////
 app.use(cors());
 app.use(express.json());
-app.use(cookieParaser());
-app.use(fileUpload({
-    useTempFiles: true
-}));
+
 
 ///////////////////////////////
 // ROUTES
 ///////////////////////////////
-app.use('/user', require('./routes/userRouter'));
-
-// app.use('/products', productsRouter);
-
-
-
 app.get('/', (req, res) => {
     res.send('Baku cold brew');
 })
 
+app.get('/products', async (req, res) => {
+    try {
+        res.json(await Products.find({}));
+    } catch (error) {
+        res.status(400).json(error);
+    }
+});
 
+app.delete('/products/:id', async (req, res) => {
+    try {
+        res.json(await Products.findByIdAndRemove(req.params.id))
+    } catch (error) {
+        res.status(400).json(error);
+    }
+});
 
+app.post('/products', async (req, res) => {
+    try {
+        res.json(await Products.create(req.body));
+    } catch (error) {
+        res.status(400).json(error);
+    }
+})
 
 
 
